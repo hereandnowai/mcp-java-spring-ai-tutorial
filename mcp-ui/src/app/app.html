@@ -1,0 +1,46 @@
+<div class="chat-container">
+  <header>
+    <div class="logo-section">
+      <div class="brand-logo">H.N.AI</div>
+      <div class="slogan">AI IS GOOD</div>
+    </div>
+    <div class="status">
+      @if (mcpService.isConnected()) {
+        <span class="online">●</span> MCP Connected ({{ mcpService.tools().length }} tools)
+      } @else {
+        <span class="offline">○</span> MCP Disconnected
+      }
+    </div>
+  </header>
+
+  <div class="chat-window" #scrollContainer>
+    @for (msg of chatService.messages(); track msg.id) {
+      <div class="message" [class.user-message]="msg.role === 'user'" [class.assistant-message]="msg.role === 'assistant'">
+        <div class="avatar">
+          {{ msg.role === 'user' ? 'U' : 'C' }}
+        </div>
+        <div class="message-content" [innerHTML]="renderMarkdown(msg.content)"></div>
+      </div>
+    }
+    @if (chatService.isTyping()) {
+      <div class="message assistant-message typing">
+        <div class="avatar">C</div>
+        <div class="message-content">Caramel is thinking...</div>
+      </div>
+    }
+  </div>
+
+  <div class="input-area">
+    <form (ngSubmit)="sendMessage()" class="input-form">
+      <input 
+        type="text" 
+        [(ngModel)]="userInput" 
+        name="userInput" 
+        placeholder="Ask Caramel about your PDFs..."
+        [disabled]="chatService.isTyping()">
+      <button type="submit" [disabled]="chatService.isTyping() || !userInput.trim()">
+        Send
+      </button>
+    </form>
+  </div>
+</div>
