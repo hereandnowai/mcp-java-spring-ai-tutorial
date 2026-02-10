@@ -26,6 +26,11 @@ public class McpServerApp {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**").allowedOrigins("*").allowedMethods("*");
             }
+
+            @Override
+            public void configureAsyncSupport(org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer configurer) {
+                configurer.setDefaultTimeout(3600000); // 1 hour
+            }
         };
     }
 }
