@@ -53,6 +53,32 @@ mvn spring-boot:run
 
 Once running, engage with the AI! Try asking: *"What are the core takeaways from the AI training document?"*
 
+## 🤖 AI Assistant Integration
+
+Connect your favorite AI assistants to the MCP server to access PDF content:
+
+### GitHub Copilot Integration
+Enable GitHub Copilot to read the PDF content directly in your conversations.
+
+📖 **[GitHub Copilot Setup Guide](COPILOT_MCP_SETUP.md)**
+
+**Quick Start**:
+1. MCP server must be running (see Step 3 above)
+2. Open GitHub Copilot Chat (Cmd+Shift+I)
+3. Ask: *"What topics are covered in the AI training PDF?"*
+
+### Claude (Cline) Integration
+Configure Claude to access and analyze the PDF content via Cline extension.
+
+📖 **[Claude/Cline Setup Guide](CLAUDE_MCP_SETUP.md)**
+
+**Quick Start**:
+1. Install Cline extension in VS Code
+2. Configure MCP server in Cline settings
+3. Ask: *"Read the AI training PDF and summarize it"*
+
+---
+
 ### Troubleshooting
 
 **If the client times out (120s timeout error)**:
