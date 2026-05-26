@@ -13,7 +13,7 @@ The MCP server configuration has been added to `.vscode/settings.json`.
 - **Server Name**: `pdf-server`
 - **Type**: SSE (Server-Sent Events)
 - **URL**: `http://localhost:8081/sse`
-- **Tool**: `readPdf` - reads "ai-training-for-java-dev.pdf"
+- **Tools**: `getTrainingTitle`, `readPdfPage`, `getPdfInfo` - access "ai-training-for-java-dev.pdf"
 
 ---
 
@@ -83,8 +83,8 @@ What are the core takeaways from the AI training document?
 
 **Solution 2**: Check MCP server is running
 ```bash
-curl http://localhost:8081/sse
-# Should connect successfully
+curl -m 2 -N http://localhost:8081/sse
+# Should establish SSE connection and show event stream
 ```
 
 **Solution 3**: Enable Copilot MCP in User Settings
@@ -113,9 +113,10 @@ mvn spring-boot:run
 ### MCP Server Details
 - **Framework**: Spring AI with Spring Boot
 - **Protocol**: SSE (Server-Sent Events)
-- **Endpoint**: `/sse` (configured in application.properties)
-- **Tool Name**: `readPdf`
-- **Tool Description**: "Read the AI training PDF document content for Java developers"
+- **SSE Endpoint**: `/sse` (auto-configured by Spring AI)
+- **Message Endpoint**: `/mcp/message` (configured in application.properties)
+- **Tool Names**: `getTrainingTitle`, `readPdfPage`, `getPdfInfo`
+- **Tool Descriptions**: Access and read pages from the AI training PDF for Java developers
 
 ### GitHub Copilot Integration
 - Uses native MCP client support

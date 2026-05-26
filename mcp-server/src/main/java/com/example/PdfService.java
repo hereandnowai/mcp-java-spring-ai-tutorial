@@ -69,4 +69,29 @@ public class PdfService {
             return "Error: " + e.getMessage();
         }
     }
+
+    @Tool(description = "Search for a keyword across all pages of the AI training PDF and return page matches")
+    public String searchPdf(String keyword) {
+        try {
+            System.out.println("Searching for keyword: " + keyword);
+            List<Document> docs = getDocs();
+            List<Integer> matches = new java.util.ArrayList<>();
+            
+            for (int i = 0; i < docs.size(); i++) {
+                if (docs.get(i).getFormattedContent().toLowerCase().contains(keyword.toLowerCase())) {
+                    matches.add(i + 1);
+                }
+            }
+            
+            if (matches.isEmpty()) {
+                return "The keyword '" + keyword + "' was not found in the PDF.";
+            }
+            
+            return "Keyword '" + keyword + "' found on " + matches.size() + " pages: " + 
+                   matches.stream().map(String::valueOf).collect(Collectors.joining(", ")) + 
+                   ". Use readPdfPage(n) to see the context.";
+        } catch (Exception e) {
+            return "Error searching PDF: " + e.getMessage();
+        }
+    }
 }

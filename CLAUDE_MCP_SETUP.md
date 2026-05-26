@@ -79,7 +79,7 @@ Can you read the AI training PDF and tell me what it covers?
 or
 
 ```
-Use the readPdf tool to get the content from the AI training document, then summarize the key concepts for Java developers.
+Use the getTrainingTitle tool to get the title and overview, then use readPdfPage to read specific pages from the AI training document.
 ```
 
 ---
@@ -118,7 +118,7 @@ Compare the recommendations in the AI training PDF with our current implementati
    ```
    📡 MCP Servers:
    - pdf-server: ✅ Connected (http://localhost:8081/sse)
-     Tools: readPdf
+     Tools: getTrainingTitle, readPdfPage, getPdfInfo
    ```
 
 ### Test the Tool Directly
@@ -131,7 +131,9 @@ List all available MCP tools
 Should respond with:
 ```
 Available MCP Tools:
-- readPdf: Read the AI training PDF document content for Java developers
+- getTrainingTitle: Get the title and overview of the AI training program for Java developers
+- readPdfPage: Read a specific page (1-10) from the AI training PDF for Java developers  
+- getPdfInfo: Get summary info about the AI training PDF (total pages, size)
 ```
 
 ---
@@ -148,8 +150,8 @@ Available MCP Tools:
 
 **Solution 2**: Check server is running
 ```bash
-curl http://localhost:8081/sse
-# Should establish SSE connection
+curl -m 2 -N http://localhost:8081/sse
+# Should establish SSE connection and show event stream
 ```
 
 **Solution 3**: Manually refresh
@@ -172,8 +174,16 @@ Should return:
 {
   "tools": [
     {
-      "name": "readPdf",
-      "description": "Read the AI training PDF document content for Java developers"
+      "name": "getTrainingTitle",
+      "description": "Get the title and overview of the AI training program for Java developers"
+    },
+    {
+      "name": "readPdfPage",
+      "description": "Read a specific page (1-10) from the AI training PDF for Java developers"
+    },
+    {
+      "name": "getPdfInfo",
+      "description": "Get summary info about the AI training PDF (total pages, size)"
     }
   ]
 }
@@ -208,7 +218,7 @@ touch ~/Library/Application\ Support/Code\ -\ Insiders/User/globalStorage/saoudr
 │   Port: 8081       │
 └────────┬───────────┘
          │
-         │ readPdf() tool
+         │ getTrainingTitle(), readPdfPage(), getPdfInfo() tools
          │
          ▼
 ┌────────────────────┐

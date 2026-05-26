@@ -1,14 +1,3 @@
 {
-  "java.compile.nullAnalysis.mode": "automatic",
-  
-  // HERE AND NOW AI - MCP Configuration for GitHub Copilot
-  "github.copilot.chat.mcp.enabled": true,
-  "github.copilot.chat.mcp.servers": {
-    "pdf-server": {
-      "type": "sse",
-      "url": "http://localhost:8081/sse",
-      "name": "PDF Content Server",
-      "description": "Access AI training PDF content for Java developers"
-    }
-  }
+    "java.compile.nullAnalysis.mode": "automatic"
 }
